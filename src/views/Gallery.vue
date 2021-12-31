@@ -37,7 +37,7 @@ export default {
   methods: {
     async getImgData() {
       const cont_type = new URLSearchParams(window.location.search);
-      const url = process.env.VUE_APP_API_ENDPOINT + '/img?cont_name=' +  cont_type.get('cont')
+      const url = process.env.VUE_APP_API_ENDPOINT + '/image?cont_name=' +  cont_type.get('cont')
       await axios.get(url).then(response => {
         this.results = response.data;
       }).catch(error => {
