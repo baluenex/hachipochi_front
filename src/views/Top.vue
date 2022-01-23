@@ -6,10 +6,10 @@
     <h2>Gallery</h2>
     <div id='galleryButton'>
       <a
-        :href="result.item_info[0].cont_name"
-        :key="result.item_info[0].cont_name"
+        :key="result.genre_name"
+        :href='"/gallery?cont=" + result.genre_name'
         class="button" v-for="result in results"
-      >{{ result.item_info[1].value }}</a>
+      >{{ result.select_value }}</a>
     </div>
   </div>
 </div>
@@ -30,8 +30,7 @@ export default {
       }
   },
   async mounted() {
-    await this.getGenre();
-    this.results = this.modifyItemInfo(this.results);
+    this.results = this.getGenre();
   },
   methods: {
     async getGenre() {
@@ -41,14 +40,6 @@ export default {
       }).catch(error => {
         console.log(error);
       })
-    },
-    modifyItemInfo(data) {
-      for (let i=0; i<data.length; i++){
-        data[i].item_info = data[i].item_info.replace("\\", "");
-        data[i].item_info = JSON.parse(data[i].item_info);
-        data[i].item_info[0].cont_name = "./gallery?cont=" + data[i].item_info[0].cont_name;
-      }
-      return data;
     }
   }
 }
